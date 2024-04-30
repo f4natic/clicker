@@ -13,16 +13,16 @@ public class KeySequence {
     public KeySequence() {
         random = new Random();
         keySequence = new HashMap<>();
-        keySequence.put(VK_F1, 200);
-        keySequence.put(VK_F2, 200);
-        keySequence.put(VK_F3, 200);
-        keySequence.put(VK_F4, 200);
-        keySequence.put(VK_F5, 200);
-        keySequence.put(VK_F6, 200);
-        keySequence.put(VK_F7, 200);
-        keySequence.put(VK_F8, 200);
-        keySequence.put(VK_F9, 200);
-        keySequence.put(VK_F10, 200);
+        keySequence.put(VK_F1, 130);
+        keySequence.put(VK_F2, 130);
+        keySequence.put(VK_F3, 130);
+        keySequence.put(VK_F4, 130);
+        keySequence.put(VK_F5, 130);
+        keySequence.put(VK_F6, 130);
+        keySequence.put(VK_F7, 130);
+        keySequence.put(VK_F8, 130);
+        keySequence.put(VK_F9, 130);
+        keySequence.put(VK_F10, 130);
     }
 
     public Map<Integer, Integer> getKeySequence() {

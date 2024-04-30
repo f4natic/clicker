@@ -30,29 +30,29 @@ public class Clicker {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                mainPanel.appendLog("Clicker was stopped");
+                return;
             }
 
+            mainPanel.appendLog("Clicker is running...");
             while(running) {
                 PointerInfo pointerInfo = MouseInfo.getPointerInfo();
                 // Получаем координаты курсора
                 int x = pointerInfo.getLocation().x;
                 int y = pointerInfo.getLocation().y;
-                mainPanel.appendLog(String.format("Cursor coordinates: (%s, %s)", x, y));
 
                 if(x < 50 && y < 50) {
                     running = false;
-                    mainPanel.appendLog("Cycle stop");
+                    mainPanel.appendLog("Clicker was stopped");
                     return;
                 }
 
                 for(Map.Entry<Integer, Integer> keyDelay : keySequence.getKeySequence().entrySet()) {
-                    mainPanel.appendLog("Pressing key " + keyDelay.getKey() + " at " + keyDelay.getValue());
                     robot.keyPress(keyDelay.getKey());
                     robot.delay(keyDelay.getValue() + keySequence.timeShift());
                     robot.keyRelease(keyDelay.getKey());
                 }
-                robot.delay(120 + keySequence.timeShift());
+                robot.delay(200 + keySequence.timeShift());
             }
         });
         thread.start();

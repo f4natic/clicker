@@ -8,8 +8,7 @@ public class MainPanel extends JPanel {
     private GroupLayout layout;
     private JButton start;
     private JButton stop;
-    private JTextArea logTextArea;
-    private JScrollPane scrollPane;
+    private JTextField logField;
 
     public MainPanel(ClickerAction clickerAction) {
         this.layout = new GroupLayout(this);
@@ -18,21 +17,15 @@ public class MainPanel extends JPanel {
         start.addActionListener(clickerAction);
         stop = new JButton("stop");
         stop.addActionListener(clickerAction);
-        logTextArea = new JTextArea();
-        logTextArea.setEditable(false); // Запрещаем редактирование текста
-
-        // Добавляем JTextArea в JScrollPane, чтобы обеспечить прокрутку, если логи будут большими
-        scrollPane = new JScrollPane(logTextArea);
+        logField = new JTextField();
+        logField.setEditable(false); // Запрещаем редактирование текста
 
         batch();
     }
 
     // Метод для добавления логов в текстовое поле
     public void appendLog(String log) {
-        if(logTextArea.getText().split("\n").length > 100) {
-            logTextArea.setText("");
-        }
-        logTextArea.append(log + "\n"); // Добавляем новый лог и переход на новую строку
+        logField.setText(log); // Добавляем новый лог и переход на новую строку
     }
 
     private void batch() {
@@ -40,7 +33,7 @@ public class MainPanel extends JPanel {
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPane)
+                        .addComponent(logField)
                         .addGroup(layout.createParallelGroup()
                                 .addComponent(start)
                                 .addComponent(stop)
@@ -49,7 +42,7 @@ public class MainPanel extends JPanel {
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup()
-                        .addComponent(scrollPane)
+                        .addComponent(logField)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(start)
                                 .addComponent(stop)
@@ -57,6 +50,7 @@ public class MainPanel extends JPanel {
                 )
         );
 
+        layout.linkSize(SwingConstants.VERTICAL, logField, start);
         layout.linkSize(SwingConstants.HORIZONTAL, start, stop);
     }
 }
